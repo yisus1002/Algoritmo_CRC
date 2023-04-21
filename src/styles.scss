@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+@use "assets/styles/_variables.scss" as variables;
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body::-webkit-scrollbar{
+  width: min-content;
+  height: min-content;
+}
+*{
+  font-size: 10px;
+}
+
+body::-webkit-scrollbar-thumb{
+  background: linear-gradient(
+    to bottom,
+    variables.color(primary),
+    variables.color(secondary)
+  );
+  border-radius: 50px;
+}
+body::-webkit-scrollbar-track{
+  background:rgb(245, 245, 245);
+}
+

@@ -1,0 +1,20 @@
+$colors: (
+    primary: #4A79F0,
+    secondary: #4A3095,
+    success: #6A2E90,
+    danger: #E44097,
+    text-primary: #444444,
+    text-secondary: #002B49,
+    white: #FFFFFF,
+    blue-light: #4A79F0,
+);
+
+$padding: 0px;
+$margin: 0px;
+
+$screen-desktop: 950px;
+$screen-tablet: 750px;
+
+@function color($color-name) {
+    @return map-get($map: $colors, $key: $color-name)
+}

@@ -1,0 +1,9 @@
+@use "../../../../../assets/styles/variables" as variables;
+
+.title__CRC{
+  font-weight: 600;
+  font-size: 4rem;
+  line-height: 191.5%;
+  letter-spacing: 0.025em;
+  color: variables.color(primary);
+}
