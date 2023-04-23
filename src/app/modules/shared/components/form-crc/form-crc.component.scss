@@ -1,0 +1,19 @@
+*{
+  font-size: 1.6rem!important;
+}
+mat-label{
+  font-size: 2rem;
+}
+input.mdc-text-field__input{
+  font-size: 1.6rem!important;
+
+}
+.cont-button{
+  justify-content: center;
+  display: flex;
+
+}
+
+:host ::ng-deep *{
+  font-size: 1.2rem;
+}

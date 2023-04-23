@@ -4,12 +4,86 @@
   <hr>
 
   <div class="row d-flex justify-content-center">
-    <div class="col col-12 col-md-6">
+    <div class="col col-12 ">
       <div class="card p-4 rounded rounded-4 border-0 shadow">
-        sdvdf
+        <app-form-crc (polinOuput)="cargar($event)"></app-form-crc>
       </div>
     </div>
   </div>
+<div class="mt-4" *ngIf="__sController.polynomio.length>0">
+  <div class="row g-2 d-flex justify-content-around">
+    <div class="col-12 col-md-6">
+      <div class="card p-4 rounded rounded-4 border-0 shadow">
+        <div class="row">
+          <p>Polinomio D(X)</p>
+         <p class=" "> <span [innerHTML]="polynomio?.polynomio | latex "></span></p>
+        </div>
+        <div class="row">
+          <p>Polinomio G(X)</p>
+         <p class=" "> <span [innerHTML]="polynomio?.polynomioGx | latex "></span></p>
+        </div>
+        <hr>
+        <div class="row">
+          <p>Polinomio binario D(X)</p>
+          <span>{{polynomio?.polynomioBinary}}</span>
+        </div>
+        <div class="row">
+          <p>Polinomio binario G(X)</p>
+          <span>{{polynomio?.polynomioBinaryGx}}</span>
+        </div>
+        <hr>
+        <div class="row">
+          <h3 class="text-center h3">Comprobación</h3>
+          <p>D(X)= {{polynomio?.DxRFinal.join('')}} <span  style="font-size: 3rem;">|</span> G(X) {{polynomio?.polynomioBinaryGx}}</p>
+          <p>El resultado de D(X) ÷ G(X) es {{polynomio?.comprobacion?.cociente.join('')}}</p>
+          <div class="mb-2">
+            <div class="" style="width: max-content;">
+              <p class="division">{{polynomio?.DxRFinal.join('')}} <span  style="font-size: 3rem;">|</span> {{polynomio?.polynomioBinaryGx}}</p>
+            </div>
+            <div class="salida"
+            *ngFor="let item of polynomio?.comprobacion['divisorAux'];let i= index ">
+
+            <p><span [innerHTML]="'&nbsp;'.repeat(i)"></span>{{polynomio?.comprobacion?.divisorAux[i].join('')}}</p>
+            <p [ngStyle]="{
+              'border-top': polynomio?.comprobacion?.residuo[i]===polynomio?.comprobacion?.residuo[polynomio?.comprobacion?.residuo.length-1] ? 'solid 1px red' : 'solid 1px',
+              'background-color': polynomio?.comprobacion?.residuo[i]===polynomio?.comprobacion?.residuo[polynomio?.comprobacion?.residuo.length-1] ? 'cyan' : 'none'
+              }"
+            ><span [innerHTML]="'&nbsp;'.repeat(i)"></span>{{polynomio?.comprobacion?.residuo[i].join('')}}</p>
+          </div>
+        </div>
+        <hr>
+      </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="card p-4 rounded rounded-4 border-0 shadow">
+        <div class="row">
+          <p>D(X)= {{polynomio?.DxR.join('')}} <span  style="font-size: 3rem;">|</span> G(X) {{polynomio?.polynomioBinaryGx}}</p>
+          <p>El resultado de D(X) ÷ G(X) es {{polynomio?.cociente.join('')}}</p>
+          <p>El CRC es <strong>{{polynomio?.CRC.join('')}}</strong></p>
+          <div class="mb-2">
+            <div class="" style="width: max-content;">
+              <p class="division">{{polynomio?.DxR.join('')}} <span  style="font-size: 3rem;">|</span> {{polynomio?.polynomioBinaryGx}}</p>
+            </div>
+            <div class="salida"
+            *ngFor="let item of polynomio?.divisor;let i= index ">
+
+            <p><span [innerHTML]="'&nbsp;'.repeat(i)"></span>{{polynomio?.divisor[i].join('')}}</p>
+            <p [ngStyle]="{
+              'border-top': polynomio?.residuo[i]===polynomio?.residuo[polynomio?.residuo.length-1] ? 'solid 1px red' : 'solid 1px',
+              'background-color': polynomio?.residuo[i]===polynomio?.residuo[polynomio?.residuo.length-1] ? 'cyan' : 'none'
+              }"
+            ><span [innerHTML]="'&nbsp;'.repeat(i)"></span>{{polynomio?.residuo[i].join('')}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <p>El valor a transmitir es <strong style="color: rgb(0, 60, 255);">{{polynomio?.DxRFinal.join('')}}</strong></p>
+      </div>
+      <hr>
+    </div>
+  </div>
+</div>
 
   </div>
 </div>

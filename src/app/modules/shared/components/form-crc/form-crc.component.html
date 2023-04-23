@@ -1,0 +1,32 @@
+<div class="col-12 col-md-6 form" style="margin: auto;">
+  <form class="row "
+  [formGroup]="formu"
+  (ngSubmit)="calcular()"
+  >
+  <div class="row g-2 d-flex justify-content-around">
+    <mat-form-field class="col-12 col-md-6 ">
+      <mat-label>Polinomio D(x)</mat-label>
+      <input matInput
+            formControlName="polynomio"
+            name="polynomio"
+            placeholder="x^2 + 1" value="">
+      <mat-error *ngIf="polynomNoValide">* Este campo es incorrecto</mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-12 col-md-6 ">
+      <mat-label>Polinomio G(x)</mat-label>
+      <input matInput
+            formControlName="polynomioGx"
+            name="polynomioGx"
+            placeholder="x + 1" value="">
+      <mat-error *ngIf="polynomGxNoValide">* Este campo es incorrecto</mat-error>
+    </mat-form-field>
+
+    <mat-error *ngIf="polynomInvalide">*G(X) no debe ser mayor a D(X)</mat-error>
+  </div>
+
+    <div class="cont-button">
+      <button [disabled]="polynomInvalide" mat-flat-button class="border" type="submit">Calcular</button>
+    </div>
+  </form>
+
+</div>

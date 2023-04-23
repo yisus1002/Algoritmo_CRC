@@ -1,9 +1,32 @@
 @use "../../../../../assets/styles/variables" as variables;
-
+*{
+  font-size: 1.6rem;
+}
 .title__CRC{
   font-weight: 600;
   font-size: 4rem;
   line-height: 191.5%;
   letter-spacing: 0.025em;
   color: variables.color(primary);
+
+
+}
+hr{
+  border-width: 10px;
+  border-radius: 30px;
+  border-color: variables.color(primary);
+}
+.salida{
+  width: max-content;
+  text-align: end;
+  padding: 0;
+  margin: 0;
+  p{
+    margin: 0;
+
+  }
+}
+.division{
+  // width: min-content;
+  border-bottom: solid 1px;
 }
