@@ -123,13 +123,17 @@ const Gx = g.reduce((max:any, str:any) => {
      dividendo= dividendo.slice(0, divisor.length);
      divisorAux.push(divisor);
 
+    //  Ejemplo
+    // dividendo=[1,1,0,1]
+    // divisor=  [1,0,0,1]
+    // resta=    [0,1,0,0]
      dividendo.forEach((element, i) => (element===divisor[i])? resta.push(0):resta.push(1));
      (dividendo[0]===0)?cociente.push(0):cociente.push(1);
     switch(resta[0]){
       case 0:
-        resta.shift();
-        resta.push(DxAux[cont]);
-        residuo.push(resta);
+        resta.shift(); // Se elimina el primer elemento
+        resta.push(DxAux[cont]); // Se baja el siguiente binario de Dx y se le agrega a la ultima pocision de resta
+        residuo.push(resta); //Se almacenan todos los residuos
         dividendo=resta;
         if(resta[0]===0){
           divisor=[];
@@ -143,16 +147,18 @@ const Gx = g.reduce((max:any, str:any) => {
       default:
         break;
     }
+    //Para quitarle el tamaño a DX
     (cont===(Gx.length)) ? Dx=DxAux.slice(cont, DxAux.length) : Dx=DxAux.slice(cont, DxAux.length);
      cont++;
     }
     return {
+      //Organizar el reciduo
       residuo:[...residuo.slice(0,residuo.length-1), residuo[residuo.length-1].slice(0,residuo[residuo.length-1].length-1)],
       cociente,
       divisorAux
      };
   }
-
+//Agregar r al Dx es decir la cantidad de ceros
   searchR(dx:any[],gx:any[]){
     const dxAux=[...dx];
     for(let i=0;i<(gx.length-1);i++){
@@ -164,22 +170,23 @@ const Gx = g.reduce((max:any, str:any) => {
   PolynomioToBinary(polynomio:string) {
     polynomio= polynomio.toUpperCase()
     const term = polynomio.split('+');
-    let expresionRNumero:any = /\d+/;
-    let exp:any[]=[];
-    let binary:any[]=[];
+    let expresionRNumero:any = /\d+/; //Expresion regular para buscar numeros en una cadena de string
+    let exp:any[]=[]; //Array para almacenar los exponentes del polinomio
+    let binary:any[]=[]; //Array para almacenar el binario resultante
     let indice!:any;
 
       term.forEach(element => {
-         indice =element?.match(expresionRNumero);
-          indice=parseInt(indice?.[0]);
+         indice =element?.match(expresionRNumero); //Buscar si el elemento contiene un numero
+          indice=parseInt(indice?.[0]); //Si lo contiene lo convierto a entero
           element.includes('X') && (indice ? exp.push(indice) : exp.push(1));
     });
 
-    exp.sort((a:any, b:any)=>(b - a));
+    exp.sort((a:any, b:any)=>(b - a)); //Ordenar de mayor a menor los exponentes
 
     let ultimo=exp[exp.length-1];
 
     exp.forEach((element, i) =>{
+      // ejemplo exp=[5,3], la diferencia es 2 pero al principio se manda 1 al binary y entre ellos se debe mandar un 0 luego un 1
         let cantCeros=element- exp[i+1]
         if(element!==ultimo){
             if( cantCeros>1){
@@ -202,6 +209,7 @@ const Gx = g.reduce((max:any, str:any) => {
         }
     });
 
+    // Si se ingresa X^2+x se envia 0 al final del array binary, pero si se ingresa x^2+x+1 se envia 1 al final del array binary,
     let ultimobi:any = term[term.length-1]?.match(expresionRNumero)
     ultimobi= parseInt(ultimobi?.[0]);
     (ultimobi === 1) ? binary.push(1) : binary.push(0);

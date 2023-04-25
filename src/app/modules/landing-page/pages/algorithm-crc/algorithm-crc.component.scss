@@ -18,7 +18,7 @@ hr{
 }
 .salida{
   width: max-content;
-  text-align: end;
+  // text-align:;
   padding: 0;
   margin: 0;
   p{
@@ -29,4 +29,8 @@ hr{
 .division{
   // width: min-content;
   border-bottom: solid 1px;
+}
+.h3{
+  font-weight: bolder;
+  color: variables.color(primary);
 }

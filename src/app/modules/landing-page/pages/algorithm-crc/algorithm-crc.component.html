@@ -43,12 +43,16 @@
             <div class="salida"
             *ngFor="let item of polynomio?.comprobacion['divisorAux'];let i= index ">
 
-            <p><span [innerHTML]="'&nbsp;'.repeat(i)"></span>{{polynomio?.comprobacion?.divisorAux[i].join('')}}</p>
+            <p><span *ngIf="i>0" style="font-family: Courier New;" [innerHTML]="'&nbsp;'.repeat(i)"></span>{{polynomio?.comprobacion?.divisorAux[i].join('')}}</p>
             <p [ngStyle]="{
-              'border-top': polynomio?.comprobacion?.residuo[i]===polynomio?.comprobacion?.residuo[polynomio?.comprobacion?.residuo.length-1] ? 'solid 1px red' : 'solid 1px',
-              'background-color': polynomio?.comprobacion?.residuo[i]===polynomio?.comprobacion?.residuo[polynomio?.comprobacion?.residuo.length-1] ? 'cyan' : 'none'
+              'text-align': polynomio?.comprobacion?.residuo[i]===polynomio?.comprobacion?.residuo[polynomio?.comprobacion?.residuo.length-1] ? 'end' : 'none',
               }"
-            ><span [innerHTML]="'&nbsp;'.repeat(i)"></span>{{polynomio?.comprobacion?.residuo[i].join('')}}</p>
+            ><span *ngIf="i>=0" style="font-family: Courier New;" [innerHTML]="'&nbsp;'.repeat(i+1)"></span><span
+            style="border-top: solid 1px ;"
+            [ngStyle]="{
+              'background-color': polynomio?.comprobacion?.residuo[i]===polynomio?.comprobacion?.residuo[polynomio?.comprobacion?.residuo.length-1] ? 'cyan' : 'none',
+            }"
+            >{{polynomio?.comprobacion?.residuo[i].join('')}}</span></p>
           </div>
         </div>
         <hr>
@@ -58,6 +62,7 @@
     <div class="col-12 col-md-6">
       <div class="card p-4 rounded rounded-4 border-0 shadow">
         <div class="row">
+          <h3 class="text-center h3">Búsqueda del CRC</h3>
           <p>D(X)= {{polynomio?.DxR.join('')}} <span  style="font-size: 3rem;">|</span> G(X) {{polynomio?.polynomioBinaryGx}}</p>
           <p>El resultado de D(X) ÷ G(X) es {{polynomio?.cociente.join('')}}</p>
           <p>El CRC es <strong>{{polynomio?.CRC.join('')}}</strong></p>
@@ -68,12 +73,14 @@
             <div class="salida"
             *ngFor="let item of polynomio?.divisor;let i= index ">
 
-            <p><span [innerHTML]="'&nbsp;'.repeat(i)"></span>{{polynomio?.divisor[i].join('')}}</p>
+            <p><span *ngIf="i>0" style="font-family: Courier New;" [innerHTML]="'&nbsp;'.repeat(i)"></span>{{polynomio?.divisor[i].join('')}}</p>
             <p [ngStyle]="{
-              'border-top': polynomio?.residuo[i]===polynomio?.residuo[polynomio?.residuo.length-1] ? 'solid 1px red' : 'solid 1px',
-              'background-color': polynomio?.residuo[i]===polynomio?.residuo[polynomio?.residuo.length-1] ? 'cyan' : 'none'
+              'text-align': polynomio?.residuo[i]===polynomio?.residuo[polynomio?.residuo.length-1] ? 'end' : 'none',
               }"
-            ><span [innerHTML]="'&nbsp;'.repeat(i)"></span>{{polynomio?.residuo[i].join('')}}</p>
+            ><span *ngIf="i>=0" style="font-family: Courier New;" [innerHTML]="'&nbsp;'.repeat(i+1)"></span><span
+            style="border-top: solid 1px ;"
+            [ngStyle]="{ 'background-color': polynomio?.residuo[i]===polynomio?.residuo[polynomio?.residuo.length-1] ? 'cyan' : 'none',}"
+            >{{polynomio?.residuo[i].join('')}}</span></p>
           </div>
         </div>
       </div>
